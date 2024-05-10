@@ -56,7 +56,7 @@ header pmu_t {
     bit<32>   soc;
     bit<32>   fracsec;
     bit<16>   stat;
-    bit<64>   phasors;
+    bit<192>   phasors;
     bit<16>   freq;
     bit<16>   dfreq;
     bit<32>   analog;
