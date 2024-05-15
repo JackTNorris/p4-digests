@@ -1,0 +1,4 @@
+matplotlib==3.3.2
+nnpy==1.4.2
+numpy==1.24.2
+pandas==1.1.3
