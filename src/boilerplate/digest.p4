@@ -156,6 +156,7 @@ control MyIngress(inout headers hdr,
         //disable hdr is valid for speed test
         if (hdr.ipv4.isValid()) {
             //conditionally send data to the control plane here using the send_digest_message action
+            send_digest_message();
             ipv4_lpm.apply();
         }
     }
