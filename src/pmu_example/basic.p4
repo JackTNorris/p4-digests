@@ -80,13 +80,6 @@ struct metadata {
     jpt_pmu_triplet_t jpt_packet;
 }
 
-
-/*
-struct metadata {
-    controller_pmu_packet jpt_packet;
-}
-*/
-
 /*************************************************************************
 *********************** P A R S E R  ***********************************
 *************************************************************************/
@@ -162,8 +155,6 @@ control MyIngress(inout headers hdr,
     bit<32> new_reg3;
     bit<32> new_reg2;
 
-    bit<32> digest_counter;
-
     bit<32> temp_mag;
     bit<32> temp_ang;
 
@@ -172,7 +163,7 @@ control MyIngress(inout headers hdr,
     }
 
     action update_registers() {
-        //0 is top of stackssss
+        //0 is top of stacks
         frac_sec_regs.read(new_reg3, (bit<32>)1);
         frac_sec_regs.read(new_reg2, (bit<32>)0);
         frac_sec_regs.write((bit<32>)2, new_reg3);
@@ -200,11 +191,11 @@ control MyIngress(inout headers hdr,
 
     action send_pmu_to_control_plane() {
         // 0 is top of stack and most recent packets
-
         magnitude_regs.read(temp_mag, (bit<32>)0);
         phase_angle_regs.read(temp_ang, (bit<32>)0);
+
         meta.jpt_packet.phasors0 = temp_mag ++ temp_ang;
-        //meta.jpt_packet.sync0 = hdr.pmu.sync;
+
         soc_regs.read(meta.jpt_packet.soc0, (bit<32>)0);
         frac_sec_regs.read(meta.jpt_packet.fracsec0, (bit<32>)0);
 
@@ -256,16 +247,16 @@ control MyIngress(inout headers hdr,
             //if not generated packet
             if(hdr.pmu.stat == (bit<16>)0x0)
             {
-              R1.read(digest_counter, 0);
-              digest_counter = digest_counter +  1;
-              R1.write(0, digest_counter);
+              //read timestamp from top of stack into temp_soc and temp_frac_sec
               soc_regs.read(temp_soc, (bit<32>)0);
               frac_sec_regs.read(temp_frac_sec, (bit<32>)0);
 
+              // calculate the difference in time between the arrived packet and the top of stack
               bit<32> soc_diff_in_frac_sec = (hdr.pmu.soc - temp_soc) * 1000000;
               bit<32> frac_sec_diff = soc_diff_in_frac_sec - temp_frac_sec + hdr.pmu.fracsec;
 
-              if(frac_sec_diff > 20000 && temp_soc != 0) //gives a bit of "breathing room" for measurements, could be 17000
+              //if the difference in time is greater than 20ms and the soc is not 0, send the phasor data to the control plane
+              if(frac_sec_diff > 20000 && temp_soc != 0) //gives a bit of "breathing room" for measurements, could be 17000 for 60hz
               {
                 send_pmu_to_control_plane();
               }
