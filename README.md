@@ -33,20 +33,23 @@ Barebones repo for getting started sending and receiving [digest](https://p4.org
 
 # PMU_EXAMPLE Instructions & Background:
 ## How it Works:
-A simple 2-host, single switch topology is deployed via mininet (this is the same )
+A simple 2-host, single switch topology is deployed via mininet (this is the same as the topology used in the basic_forwarding exercise provided by P4)
 ## How to Run:
 - Navigate to the pmu_example folder
-- Install all pip packages using `pip install -r requirements. txt`
+- Install pip packages using `pip install -r requirements.txt` (you might need to install pandas and nnpy)
 - Call `make run`
 - In mininet, call `xterm h1 h2 s1`
 - Navigate to s1's terminal
 - Run `simple_switch_CLI < rules.cmd` to install the forwarding rules on the device
 - Run `python3 controller.py --terminate_after 100` to enable a script that listens for digest messages. The 100 is arbitrary in this case (the program will end after generating 100 packets)
+- ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Navigate to `h2`'s terminal
 - Run `python3 receive.py --terminate_after <the  number of packets you expect to receive>`
+- ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Navigate to `h1`'s terminal
 - Run `python3 send.py pmu12.csv --num_packets 100`
-- Notice that `h2`s terminal has recieved all packets
+- ^^ If you get python package issues, run `pip3 install` in the xterminal
+- Notice that `h2`s terminal has received all packets
 - Go into pmu_example/missing-data.json and add in a set of indexes between 1-100
 - Re-run the receive.py script
 - Re-run the send.py script

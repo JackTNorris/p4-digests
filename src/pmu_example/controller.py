@@ -231,7 +231,7 @@ def on_digest_recv(msg):
 
 def setup():
     parser = runtime_CLI.get_parser()
-    parser.add_argument('--terminate_after', type=int, help='Number of packets to generate before terminating')
+    parser.add_argument('--terminate_after', default=100, type=int, help='Number of packets to generate before terminating')
 
     args = parser.parse_args()
 
