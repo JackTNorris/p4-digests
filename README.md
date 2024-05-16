@@ -44,10 +44,10 @@ A simple 2-host, single switch topology is deployed via mininet (this is the sam
 - Run `python3 controller.py --terminate_after 100` to enable a script that listens for digest messages. The 100 is arbitrary in this case (the program will end after generating 100 packets)
 - ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Navigate to `h2`'s terminal
-- Run `python3 receive.py --terminate_after <the  number of packets you expect to receive>`
+- Run `python3 receive.py --terminate_after 30`
 - ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Navigate to `h1`'s terminal
-- Run `python3 send.py pmu12.csv --num_packets 100`
+- Run `python3 send.py pmu12.csv --num_packets 30`
 - ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Notice that `h2`s terminal has received all packets
 - Go into pmu_example/missing-data.json and add in a set of indexes between 1-100
