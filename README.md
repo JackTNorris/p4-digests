@@ -57,7 +57,7 @@ At the local controller, the digest message is parsed and the 3 PMU measurements
 - Run `python3 receive.py --terminate_after 30`. Run with the `-h` option if you want to see other command arguments
 - ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Navigate to `h1`'s terminal
-- Run `python3 send.py pmu12.csv --num_packets 30` Run with the `-h` option if you want to see other command arguments
+- Run `python3 send.py pmu12.csv --num_packets 30` Run with the `-h` option if you want to see other command arguments (you can feed in a larger pmu csv file like pmu8_5k.csv if you would like)
 - ^^ If you get python package issues, run `pip3 install` in the xterminal
 - Notice that `h2`s terminal has received all packets
 - Go into pmu_example/missing-data.json and add in a set of indexes between 1-100

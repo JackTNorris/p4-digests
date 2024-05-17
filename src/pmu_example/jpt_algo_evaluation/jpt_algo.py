@@ -5,6 +5,7 @@ import numpy as np
 from statistics import mean, stdev
 import cmath
 
+# this term cancels out, so setting it to zero here. It is used in the calculation of the complex voltage
 wt = 0
 
 def parse_csv_data():
