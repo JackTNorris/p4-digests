@@ -67,7 +67,10 @@ At the local controller, the digest message is parsed and the 3 PMU measurements
 - Effectively, if you have 5 missing indexes in your missing indexes file, you only send 95 packets from send.py. Receive.py receives 100 packets, meaning the switch made up the difference
 
 ## How to Run Evaluations
-I wrote a few scripts that aided in helping me evaluate the effectiveness of this model. I'll add running instructions here shortly
+I wrote a few scripts that aided in helping me evaluate the effectiveness of this model. I've put them in the src/pmu_example/evalution folder for your use. Below is a brief outline of what everything in there does:
+
+- *5k-analysis-\*.sh* are shell scripts to run on h1, s1, and h2.
+- 
 
 ## Allowances and Future Works
 Most of this code was hastily written, so *please forgive some of the messiness and redundancies*. I learned a lot about P4 and networking through the process of experimenting with this, so if there's something that isn't making any sense to you, *don't hesitate to make a change -- I likely just forgot to change something*. Additionally, I know that both the topology and detection strategy here are rudimentary -- few topologies are rarely this simple, and I made a few brash assumptions (in-order packet delivery, UDP, e.t.c) largely due to this simplicity. 
